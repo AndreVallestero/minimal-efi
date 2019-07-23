@@ -15,7 +15,7 @@ Assuming you are in the same directory as `main.c`, you simply need to run these
 3. `objcopy -j .text -j .sdata -j .data -j .dynamic -j .dynsym  -j .rel -j .rela -j .reloc --target=efi-app-x86_64 BOOTX64.so BOOTX64.EFI`
 
 ## Testing
-To test, use a GPT partitioned drive, and on a partition formated as FAT32 (FAT16 and FAT12 are acceptable as well), create a folder called `EFI` in the partition's root directory, create a folder called `BOOT` inside the `EFI` directory, and finally, place your `BOOTX64.EFI` file inside the `BOOT` directory. The final folder structure should be `/EFI/BOOT/BOOTX64.EFI`.
+To test, use a GPT partitioned drive, and on a partition formated as FAT32 (FAT16 and FAT12 are acceptable as well), create a directory called `EFI` in the partition's root directory, create a directory called `BOOT` inside the `EFI` directory, and finally, place your `BOOTX64.EFI` file inside the `BOOT` directory. The final directory structure should be `/EFI/BOOT/BOOTX64.EFI`.
 
 Now you can simply select that partition on your motherboard's boot selector/menu and you will be able to boot to it.
 
