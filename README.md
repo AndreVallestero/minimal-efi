@@ -1,18 +1,17 @@
 # minimal-efi-app
 A bare-bones minimal application for efi on the x64 platform
 
-## Dependencies
-The only dependencies are clang and gnu-efi.
+## Build tools
+The only build tools required are `clang` and `lld`. This project does not depend on any external headers, libraries, or link files. As such, the final executable is extremely small (only 2560 bytes)
 
 On arch linux this can be easily installed with the command 
-`pacman -S clang gnu-efi-libs`
+`pacman -S clang lld`
 
 ## Building
 Assuming you are in the same directory as `main.c`, you simply need to run these 3 commands:
 
-1. `clang -I/usr/include/efi -I/usr/include/efi/x86_64 -I/usr/include/efi/protocol -fno-stack-protector -fpic -fshort-wchar -mno-red-zone -DHAVE_USE_MS_ABI -c -o main.o main.c`
-2. `ld -nostdlib -znocombreloc -T /usr/lib/elf_x86_64_efi.lds -shared -Bsymbolic -L /usr/lib /usr/lib/crt0-efi-x86_64.o main.o -o BOOTX64.so -lefi -lgnuefi`
-3. `objcopy -j .text -j .sdata -j .data -j .dynamic -j .dynsym  -j .rel -j .rela -j .reloc --target=efi-app-x86_64 BOOTX64.so BOOTX64.EFI`
+1. `clang -target x86_64-pc-win32-coff -fno-stack-protector -fshort-wchar -mno-red-zone -c main.c -o main.o`
+2. `lld-link -subsystem:efi_application -nodefaultlib -dll -entry:efi_main main.o -out:BOOTX64.EFI`
 
 ## Testing
 To test, use a GPT partitioned drive, and on a partition formated as FAT32 (FAT16 and FAT12 are acceptable as well), create a directory called `EFI` in the partition's root directory, create a directory called `BOOT` inside the `EFI` directory, and finally, place your `BOOTX64.EFI` file inside the `BOOT` directory. The final directory structure should be `/EFI/BOOT/BOOTX64.EFI`.
@@ -30,5 +29,7 @@ Further explanation can be found from these sources:
 - https://github.com/yoppeh/efi-clang
 
 ## Extra
-Oneliner with cleanup:
-```clang -I/usr/include/efi -I/usr/include/efi/x86_64 -I/usr/include/efi/protocol -fno-stack-protector -fpic -fshort-wchar -mno-red-zone -DHAVE_USE_MS_ABI -c -o main.o main.c  && ld -nostdlib -znocombreloc -T /usr/lib/elf_x86_64_efi.lds -shared -Bsymbolic -L /usr/lib /usr/lib/crt0-efi-x86_64.o main.o -o BOOTX64.so -lefi -lgnuefi && objcopy -j .text -j .sdata -j .data -j .dynamic -j .dynsym  -j .rel -j .rela -j .reloc --target=efi-app-x86_64 BOOTX64.so BOOTX64.EFI && rm main.o BOOTX64.so```
+One-liner with cleanup:
+`clang -target x86_64-pc-win32-coff -fno-stack-protector -fshort-wchar -mno-red-zone -c main.c -o main.o && lld-link -subsystem:efi_application -nodefaultlib -dll -entry:efi_main main.o -out:BOOTX64.EFI && rm main.o BOOTX64.lib`
+
+![scrot](https://user-images.githubusercontent.com/39736205/61829719-7c19a300-ae37-11e9-8571-86df407a81b3.png)
