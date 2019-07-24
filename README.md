@@ -26,6 +26,7 @@ Further explanation can be found from these sources:
 - https://www.rodsbooks.com/efi-programming/hello.html
 - https://wiki.osdev.org/UEFI_Bare_Bones
 - https://www.happyassassin.net/2014/01/25/uefi-boot-how-does-that-actually-work-then/
+- https://dvdhrm.github.io/2019/01/31/goodbye-gnuefi/
 
 ## Extra
 Oneliner with cleanup:
