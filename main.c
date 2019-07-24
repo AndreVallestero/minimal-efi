@@ -1,4 +1,3 @@
-
 #include <stdint.h>
 
 #define EFI_FALSE                   0
@@ -53,6 +52,49 @@
 #define EFI_MEMORY_RO               0x0000000000020000
 #define EFI_MEMORY_RUNTIME          0x8000000000000000
 
+#define EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID {0x387477c1, 0x69c7, 0x11d2, {0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}
+#define EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID    {0x387477c2, 0x69c7, 0x11d2, {0x82, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}
+
+#define EFI_TIME_ADJUST_DAYLIGHT    0x01
+#define EFI_TIME_IN_DAYLIGHT        0x02
+#define EFI_UNSPECIFIED_TIMEZONE    0x07ff
+
+#define EFI_OPTIONAL_POINTER                0x00000001
+
+#define CAPSULE_FLAGS_PERSIST_ACROSS_RESET  0x00010000
+#define CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE 0x00020000
+#define CAPSULE_FLAGS_INITIATE_RESET        0x00040000
+
+#define EFI_DEVICE_PATH_PROTOCOL_GUID   {0x09576e91, 0x6d3f, 0x11d2, {0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}
+
+/* Event Types */
+#define EVT_TIMER                               0x80000000
+#define EVT_RUNTIME                             0x40000000
+#define EVT_NOTIFY_WAIT                         0x00000100
+#define EVT_NOTIFY_SIGNAL                       0x00000200
+#define EVT_SIGNAL_EXIT_BOOT_SERVICES           0x00000201
+#define EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE       0x00000202
+    
+#define TPL_APPLICATION                         4
+#define TPL_CALLBACK                            8
+#define TPL_NOTIFY                              16
+#define TPL_HIGH_LEVEL                          31
+
+#define EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL    0x00000001
+#define EFI_OPEN_PROTOCOL_GET_PROTOCOL          0x00000002
+#define EFI_OPEN_PROTOCOL_TEST_PROTOCOL         0x00000004
+#define EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER   0x00000008
+#define EFI_OPEN_PROTOCOL_BY_DRIVER             0x00000010
+#define EFI_OPEN_PROTOCOL_EXCLUSIVE             0x00000020
+
+#define EFI_ACPI_TABLE_GUID     {0x8868e871, 0xe4f1, 0x11d3, {0xbc, 0x22, 0x00, 0x80, 0xc7, 0x3c, 0x88, 0x81}}
+#define ACPI_TABLE_GUID         {0xeb9d2d30, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
+#define SAL_SYSTEM_TABLE_GUID   {0xeb9d2d32, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
+#define SMBIOS_TABLE_GUID       {0xeb9d2d31, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
+#define SMBIOS2_TABLE_GUID      {0xf2fd1544, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94}}
+#define MPS_TABLE_GUID          {0xeb9d2d2f, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
+#define EFI_ACPI_20_TABLE_GUID  EFI_ACPI_TABLE_GUID
+#define EFO_ACPI_10_TABLE_GUID  ACPI_TABLE_GUID
 
 typedef uint8_t     BOOLEAN;
 typedef int16_t     CHAR16;
@@ -99,9 +141,6 @@ typedef struct EFI_TABLE_HEADER {
     UINT32  Reserved;
 } EFI_TABLE_HEADER;
 
-#define EFI_SIMPLE_TEXT_INPUT_PROTOCOL_GUID {0x387477c1, 0x69c7, 0x11d2, {0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}
-
-
 typedef struct EFI_INPUT_KEY {
     UINT16  ScanCode;
     UINT16  UnicodeChar;
@@ -117,9 +156,6 @@ typedef struct EFI_SIMPLE_TEXT_INPUT_PROTOCOL {
     EFI_INPUT_READ_KEY  ReadKeyStroke;
     EFI_EVENT           WaitForKey;
 } EFI_SIMPLE_TEXT_INPUT_PROTOCOL;
-
-#define EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL_GUID    {0x387477c2, 0x69c7, 0x11d2, {0x82, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}
-
 
 struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL;
 
@@ -155,13 +191,6 @@ typedef struct EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL {
     SIMPLE_TEXT_OUTPUT_MODE         *Mode;
 } EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL;
 
-
-#define EFI_TIME_ADJUST_DAYLIGHT    0x01
-#define EFI_TIME_IN_DAYLIGHT        0x02
-
-#define EFI_UNSPECIFIED_TIMEZONE    0x07ff
-
-
 typedef struct EFI_TIME {
     UINT16  Year;
     UINT8   Month;
@@ -181,14 +210,6 @@ typedef struct EFI_TIME_CAPABILITIES {
     UINT32  Accuracy;
     BOOLEAN SetsToZero;
 } EFI_TIME_CAPABILITIES;
-
-
-#define EFI_OPTIONAL_POINTER                0x00000001
-
-#define CAPSULE_FLAGS_PERSIST_ACROSS_RESET  0x00010000
-#define CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE 0x00020000
-#define CAPSULE_FLAGS_INITIATE_RESET        0x00040000
-
 
 typedef enum EFI_RESET_TYPE {
     EfiResetCold,
@@ -245,38 +266,11 @@ typedef struct EFI_RUNTIME_SERVICES {
     EFI_QUERY_VARIABLE_INFO         QueryVariableInfo;
 } EFI_RUNTIME_SERVICES;
 
-
-
-#define EFI_DEVICE_PATH_PROTOCOL_GUID   {0x09576e91, 0x6d3f, 0x11d2, {0x8e, 0x39, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b}}
-
-
 typedef struct EFI_DEVICE_PATH_PROTOCOL {
     UINT8   Type;
     UINT8   SubType;
     UINT8   Length[2];
 } EFI_DEVICE_PATH_PROTOCOL;
-
-
-/* Event Types */
-#define EVT_TIMER                               0x80000000
-#define EVT_RUNTIME                             0x40000000
-#define EVT_NOTIFY_WAIT                         0x00000100
-#define EVT_NOTIFY_SIGNAL                       0x00000200
-#define EVT_SIGNAL_EXIT_BOOT_SERVICES           0x00000201
-#define EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE       0x00000202
-    
-#define TPL_APPLICATION                         4
-#define TPL_CALLBACK                            8
-#define TPL_NOTIFY                              16
-#define TPL_HIGH_LEVEL                          31
-
-#define EFI_OPEN_PROTOCOL_BY_HANDLE_PROTOCOL    0x00000001
-#define EFI_OPEN_PROTOCOL_GET_PROTOCOL          0x00000002
-#define EFI_OPEN_PROTOCOL_TEST_PROTOCOL         0x00000004
-#define EFI_OPEN_PROTOCOL_BY_CHILD_CONTROLLER   0x00000008
-#define EFI_OPEN_PROTOCOL_BY_DRIVER             0x00000010
-#define EFI_OPEN_PROTOCOL_EXCLUSIVE             0x00000020
-
 
 typedef VOID (*EFI_EVENT_NOTIFY)(EFI_EVENT Event, VOID *Context);
 
@@ -329,7 +323,6 @@ typedef struct EFI_OPEN_PROTOCOL_INFORMATION_ENTRY {
     UINT32      OpenCount;
 } EFI_OPEN_PROTOCOL_INFORMATION_ENTRY;
 
-
 typedef EFI_STATUS (*EFI_RAISE_TPL)(EFI_TPL NewTpl);
 typedef EFI_STATUS (*EFI_RESTORE_TPL)(EFI_TPL OldTpl);
 typedef EFI_STATUS (*EFI_ALLOCATE_PAGES)(EFI_ALLOCATE_TYPE Type, EFI_MEMORY_TYPE MemoryType, UINTN Pages, EFI_PHYSICAL_ADDRESS *Memory);
@@ -373,7 +366,6 @@ typedef EFI_STATUS (*EFI_CALCULATE_CRC32)(VOID *Data, UINTN DataSize, UINT32 *Cr
 typedef EFI_STATUS (*EFI_COPY_MEM)(VOID *Destination, VOID *Source, UINTN Length);
 typedef EFI_STATUS (*EFI_SET_MEM)(VOID *Buffer, UINTN Size, UINT8 Value);
 typedef EFI_STATUS (*EFI_CREATE_EVENT_EX)(UINT32 Type, EFI_TPL NotifyTpl, EFI_EVENT_NOTIFY NotifyFunction, VOID *NotifyContext, EFI_GUID *EventGroup, EFI_EVENT *Event);
-
 
 typedef struct EFI_BOOT_SERVICES {
     EFI_TABLE_HEADER                            Hdr;
@@ -422,18 +414,6 @@ typedef struct EFI_BOOT_SERVICES {
     EFI_SET_MEM                                 SetMem;
     EFI_CREATE_EVENT_EX                         CreateEventEx;
 } EFI_BOOT_SERVICES;
-
-
-
-#define EFI_ACPI_TABLE_GUID     {0x8868e871, 0xe4f1, 0x11d3, {0xbc, 0x22, 0x00, 0x80, 0xc7, 0x3c, 0x88, 0x81}}
-#define ACPI_TABLE_GUID         {0xeb9d2d30, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
-#define SAL_SYSTEM_TABLE_GUID   {0xeb9d2d32, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
-#define SMBIOS_TABLE_GUID       {0xeb9d2d31, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
-#define SMBIOS2_TABLE_GUID      {0xf2fd1544, 0x9794, 0x4a2c, {0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94}}
-#define MPS_TABLE_GUID          {0xeb9d2d2f, 0x2d88, 0x11d3, {0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d}}
-#define EFI_ACPI_20_TABLE_GUID  EFI_ACPI_TABLE_GUID
-#define EFO_ACPI_10_TABLE_GUID  ACPI_TABLE_GUID
-
 
 typedef struct EFI_CONFIGURATION_TABLE {
     EFI_GUID    VendorGuid;
