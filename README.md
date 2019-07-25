@@ -8,7 +8,7 @@ On arch linux this can be easily installed with the command
 `pacman -S clang lld`
 
 ## Building
-Assuming you are in the same directory as `main.c`, you simply need to run these 3 commands:
+Assuming you are in the same directory as `main.c`, you simply need to run these 2 commands:
 
 1. `clang -target x86_64-pc-win32-coff -fno-stack-protector -fshort-wchar -mno-red-zone -c main.c -o main.o`
 2. `lld-link -subsystem:efi_application -nodefaultlib -dll -entry:efi_main main.o -out:BOOTX64.EFI`
