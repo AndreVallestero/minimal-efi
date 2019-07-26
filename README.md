@@ -27,6 +27,7 @@ Further explanation can be found from these sources:
 - https://www.happyassassin.net/2014/01/25/uefi-boot-how-does-that-actually-work-then/
 - https://dvdhrm.github.io/2019/01/31/goodbye-gnuefi/
 - https://github.com/yoppeh/efi-clang
+- https://uefi.org/specifications
 
 ## Extra
 One-liner with cleanup:
