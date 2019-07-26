@@ -1,8 +1,13 @@
 # minimal-efi-app
 A bare-bones minimal application for efi on the x64 platform
+- 0 external dependencies
+- 1 source file
+- 42 SLOC
+- 2 compile commands
+- 2560 bytes binary
 
 ## Build tools
-The only build tools required are `clang` and `lld`. This project does not depend on any external headers, libraries, or link files. As such, the final executable is extremely small (only 2560 bytes)
+The only build tools required are `clang` and `lld`. This project does not depend on any external headers, libraries, or link files.
 
 On arch linux this can be easily installed with the command 
 `pacman -S clang lld`
