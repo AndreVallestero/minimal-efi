@@ -19,14 +19,15 @@ To test, use a GPT partitioned drive, and on a partition formated as FAT32 (FAT1
 Now you can simply select that partition on your motherboard's boot selector/menu and you will be able to boot to it.
 
 ## Acknowledgments
-Further explanation can be found from these sources:
-
+Code mostly derived from:
+- https://github.com/yoppeh/efi-clang
 - https://kazlauskas.me/entries/x64-uefi-os-1.html
+
+Further explanation can be found from these sources:
 - https://www.rodsbooks.com/efi-programming/hello.html
 - https://wiki.osdev.org/UEFI_Bare_Bones
 - https://www.happyassassin.net/2014/01/25/uefi-boot-how-does-that-actually-work-then/
 - https://dvdhrm.github.io/2019/01/31/goodbye-gnuefi/
-- https://github.com/yoppeh/efi-clang
 - https://uefi.org/specifications
 
 ## Extra
