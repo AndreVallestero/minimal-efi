@@ -1,46 +1,46 @@
 #include <stdint.h>
 
 typedef struct EfiTableHeader {
-    uint64_t  Signature;
-    uint32_t  Revision;
-    uint32_t  HeaderSize;
-    uint32_t  CRC32;
-    uint32_t  Reserved;
+    uint64_t  signature;
+    uint32_t  revision;
+    uint32_t  headerSize;
+    uint32_t  crc32;
+    uint32_t  reserved;
 } EfiTableHeader;
 
 struct EfiSimpleTextOutputProtocol;
-typedef uint64_t (*EfiTextString)(struct EfiSimpleTextOutputProtocol *This, int16_t *String);
+typedef uint64_t (*EfiTextString)(struct EfiSimpleTextOutputProtocol* This, int16_t* string);
 typedef struct EfiSimpleTextOutputProtocol {
-    uint64_t      Reset;
-    EfiTextString OutputString;
-    uint64_t      TestString;
-    uint64_t      QueryMode;
-    uint64_t      SetMode;
-    uint64_t      SetAttribute;
-    uint64_t      ClearScreen;
-    uint64_t      SetCursorPosition;
-    uint64_t      EnableCursor;
-    uint64_t      Mode;
+    uint64_t      reset;
+    EfiTextString output_string;
+    uint64_t      test_string;
+    uint64_t      query_mode;
+    uint64_t      set_mode;
+    uint64_t      set_attribute;
+    uint64_t      clear_screen;
+    uint64_t      set_cursor_position;
+    uint64_t      enable_cursor;
+    uint64_t      mode;
 } EfiSimpleTextOutputProtocol;
 
 typedef struct EfiSystemTable {
-    EfiTableHeader              Hdr;
-    int16_t                     *FirmwareVendor;
-    uint32_t                    FirmwareRevision;
-    void*                       ConsoleInHandle;
-    uint64_t                    ConIn;
-    void*                       ConsoleOutHandle;
-    EfiSimpleTextOutputProtocol *ConOut;
-    void*                       StandardErrorHandle;
-    uint64_t                    StdErr;
-    uint64_t                    RuntimeServices;
-    uint64_t                    BootServices;
-    uint64_t                    NumberOfTableEntries;
-    uint64_t                    ConfigurationTable;
+    EfiTableHeader               hdr;
+    int16_t*                     firmwareVendor;
+    uint32_t                     firmwareRevision;
+    void*                        consoleInHandle;
+    uint64_t                     conIn;
+    void*                        consoleOutHandle;
+    EfiSimpleTextOutputProtocol* conOut;
+    void*                        standardErrorHandle;
+    uint64_t                     stdErr;
+    uint64_t                     runtimeServices;
+    uint64_t                     bootServices;
+    uint64_t                     numberOfTableEntries;
+    uint64_t                     configurationTable;
 } EfiSystemTable;
 
 int efi_main(void *imageHandle, EfiSystemTable* systemTable) {
-    systemTable->ConOut->OutputString(systemTable->ConOut, (int16_t *)L"Hello, World!");
+    systemTable->conOut->output_string(systemTable->conOut, (int16_t *)L"Hello, World!");
     for(;;) __asm__("hlt");
     return 0;
 }
