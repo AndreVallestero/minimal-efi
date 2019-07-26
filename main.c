@@ -9,7 +9,7 @@ typedef struct EfiTableHeader {
 } EfiTableHeader;
 
 struct EfiSimpleTextOutputProtocol;
-typedef uint64_t (*EfiTextString)(struct EfiSimpleTextOutputProtocol* This, int16_t* string);
+typedef uint64_t (*EfiTextString)(struct EfiSimpleTextOutputProtocol* this, int16_t* string);
 typedef struct EfiSimpleTextOutputProtocol {
     uint64_t      reset;
     EfiTextString output_string;
