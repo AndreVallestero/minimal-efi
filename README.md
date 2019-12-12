@@ -1,5 +1,5 @@
-# minimal-efi-app
-A bare-bones minimal application for efi on the x64 platform
+# minimal-efi
+A bare-bones minimal executable application for efi on the x64 platform
 - 0 external dependencies
 - 1 source file
 - 42 SLOC
@@ -27,6 +27,7 @@ Now you can simply select that partition on your motherboard's boot selector/men
 Code mostly derived from:
 - https://github.com/yoppeh/efi-clang
 - https://kazlauskas.me/entries/x64-uefi-os-1.html
+- https://www.tianocore.org
 
 Further explanation can be found from these sources:
 - https://www.rodsbooks.com/efi-programming/hello.html
