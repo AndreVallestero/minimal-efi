@@ -39,7 +39,7 @@ typedef struct EfiSystemTable {
     uint64_t                     configurationTable;
 } EfiSystemTable;
 
-int efi_main(void *imageHandle, EfiSystemTable* systemTable) {
+int _DllMainCRTStartup(void *imageHandle, EfiSystemTable* systemTable) {
     systemTable->conOut->output_string(systemTable->conOut, (int16_t *)L"Hello, World!");
     for(;;);
     return 0;

@@ -16,7 +16,7 @@ On arch linux this can be easily installed with the command
 Assuming you are in the same directory as `main.c`, you simply need to run these 2 commands:
 
 1. `clang -target x86_64-pc-win32-coff -fno-stack-protector -fshort-wchar -mno-red-zone -c main.c -o main.o`
-2. `lld-link -subsystem:efi_application -nodefaultlib -dll -entry:efi_main main.o -out:BOOTX64.EFI`
+2. `lld-link -subsystem:efi_application -nodefaultlib -dll main.o -out:BOOTX64.EFI`
 
 ## Testing
 To test, use a GPT partitioned drive, and on a partition formated as FAT32 (FAT16 and FAT12 are acceptable as well), create a directory called `EFI` in the partition's root directory, create a directory called `BOOT` inside the `EFI` directory, and finally, place your `BOOTX64.EFI` file inside the `BOOT` directory. The final directory structure should be `/EFI/BOOT/BOOTX64.EFI`.
@@ -38,6 +38,6 @@ Further explanation can be found from these sources:
 
 ## Extra
 One-liner with cleanup:
-`clang -target x86_64-pc-win32-coff -fno-stack-protector -fshort-wchar -mno-red-zone -c main.c -o main.o && lld-link -subsystem:efi_application -nodefaultlib -dll -entry:efi_main main.o -out:BOOTX64.EFI && rm main.o BOOTX64.lib`
+`clang -target x86_64-pc-win32-coff -fno-stack-protector -fshort-wchar -mno-red-zone -c main.c -o main.o && lld-link -subsystem:efi_application -nodefaultlib -dll -out:BOOTX64.EFI && rm main.o BOOTX64.lib`
 
 ![scrot](https://user-images.githubusercontent.com/39736205/61829719-7c19a300-ae37-11e9-8571-86df407a81b3.png)
