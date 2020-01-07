@@ -41,6 +41,6 @@ typedef struct EfiSystemTable {
 
 int efi_main(void *imageHandle, EfiSystemTable* systemTable) {
     systemTable->conOut->output_string(systemTable->conOut, (int16_t *)L"Hello, World!");
-    for(;;) __asm__("hlt");
+    for(;;);
     return 0;
 }
